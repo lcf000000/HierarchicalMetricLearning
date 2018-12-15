@@ -1,0 +1,3 @@
+*.mat
+./feature
+./cifar-100-matlab
