@@ -1,3 +1,4 @@
 *.mat
+startup.m
 ./feature
 ./cifar-100-matlab
