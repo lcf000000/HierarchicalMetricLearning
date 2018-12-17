@@ -40,5 +40,5 @@ for j=1:numel(unique(fine_labels))
             fprintf('processing %d-th image...\n', i);
         end
     end
-    save(sprintf('./feature/cifar/train/cifar100_train_%d.mat', j-1), 'data_feature', 'labels_0', 'labels_1');
+    save(sprintf('./feature/cifar100/train/cifar100_train_%d_%d.mat', j-1, labels_1{1}), 'data_feature', 'labels_0', 'labels_1');
 end

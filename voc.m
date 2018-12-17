@@ -14,7 +14,7 @@ for i=1:numel(class_label)
     data_feature = [];
     labels_0 = [];
     labels_1 = [];
-    txtFile = fopen([ann_path, class_label{i}, '_val.txt']);
+    txtFile = fopen([ann_path, class_label{i}, '_train.txt']);
     lines = textscan(txtFile, '%s%d');
     % load and preprocess an image
     coarse = 0;
@@ -52,5 +52,5 @@ for i=1:numel(class_label)
         end
     end
     fclose(txtFile);
-    save(sprintf('./feature/pascalvoc/train/pascalvoc_test_%d.mat', i-1), 'data_feature', 'labels_0', 'labels_1');
+    save(sprintf('./feature/pascalvoc/train/pascalvoc_train_%d_%d.mat', i-1, coarse), 'data_feature', 'labels_0', 'labels_1');
 end
