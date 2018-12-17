@@ -1,15 +1,15 @@
-function [tdt, trt, fRate]=rmml_rie(dataset, lam, tt)
+function [tdt, trt, Q_rmml]=rmml_rie(dataset, lam, tt, m)
 
 tic
-S = generatePosSamples(dataset);
-D = generateNegSamples(dataset);
+S = generatePosSamples(dataset, m);
+D = generateNegSamples(dataset, m);
 tdt=toc;
 params=[lam;tt];
 Q_0 = eye(513);
 
 % training code 
 
-[trt,Q_rmml] = rmml_train(S, D, Q_0, params);
+[trt, Q_rmml] = rmml_train(S, D, Q_0, params);
  
 % %% calculate similarity
 % 

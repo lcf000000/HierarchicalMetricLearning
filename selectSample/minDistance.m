@@ -1,8 +1,8 @@
-function selected = minDistance(anchor, data_feature, pair_flag)
+function selected = minDistance(anchor, data_feature, pair_flag, k)
 %SELECTSAMPLE Summary of this function goes here
 %   Detailed explanation goes here
 	len = size(data_feature, 3);
-    distance = ones(len-1, 1);
+    distance = [];
     for i=1:len
         if(pair_flag)
             sample = data_feature(:, :, i);
@@ -14,6 +14,7 @@ function selected = minDistance(anchor, data_feature, pair_flag)
             end
         end
     end
-    [~, selected] = minK(distance);
+    [~, selected] = sort(distance);
+    selected = selected(1:k);
 end
 
