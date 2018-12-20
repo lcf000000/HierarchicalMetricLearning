@@ -4,7 +4,7 @@ function CY1 = Compute_Log_Cov(SY1)
 number_sets1=length(SY1);
 for tmpC1=1:number_sets1
     Y1=SY1{tmpC1};
-    Y1 = transpose(Y1);
+    %Y1 = transpose(Y1);
     y1_mu = mean(Y1,2);       
     
     Y1 = Y1-repmat(y1_mu,1,size(Y1,2));

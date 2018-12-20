@@ -1,13 +1,13 @@
 function S = generatePosSamples(dataset, m)
 %GENERATESAMPLE Summary of this function goes here
 %   Detailed explanation goes here
-    file_list = dir(['../feature/', dataset, '/spdFeature_train/', dataset, '_train_*.mat' ]);
+    dirPre = '/home/data/ML_Data/';
+    file_list = dir([dirPre, dataset, '/spdFeature_train/', dataset, '_train_*.mat' ]);
     class_num = length(file_list);
     S = zeros(513, 513);
     for i=1:class_num
-        file = dir(['../feature/', dataset, '/spdFeature_train/', dataset, '_train_', num2str(i), '_*.mat']);
-        load(['../feature/', dataset, '/spdFeature_train/', file.name]);
-        anchor_num = length(data_feature);
+        load([dirPre, dataset, '/spdFeature_train/', file_list(i).name]);
+        anchor_num = numel(labels_0);
         picked = zeros(anchor_num, anchor_num);
         for j=1:anchor_num
             anchor = data_feature(:, :, j);

@@ -1,9 +1,18 @@
-function [tdt, trt, Q_rmml]=rmml_rie(dataset, lam, tt, m)
+function [tdt, trt, fRate]=rmml_rie(dataset, lam, tt, m)
+ dirPre = '/home/data/ML_Data/';
+% tic
+% S = generatePosSamples(dataset, m);
+% save([dirPre, dataset, '/', dataset,'_S.mat'], 'S');
+% fprintf('Positive samples done ! \n');
+% D = generateNegSamples(dataset, m);
+% save([dirPre, dataset, '/', dataset,'_D.mat'], 'D');
+% fprintf('Negtive samples done ! \n');
+% tdt=toc;
 
-tic
-S = generatePosSamples(dataset, m);
-D = generateNegSamples(dataset, m);
-tdt=toc;
+tdt = 9600;
+load([dirPre, dataset, '/', dataset, '_S.mat']);
+load([dirPre, dataset, '/', dataset, '_D.mat']);
+
 params=[lam;tt];
 Q_0 = eye(513);
 
@@ -11,25 +20,16 @@ Q_0 = eye(513);
 
 [trt, Q_rmml] = rmml_train(S, D, Q_0, params);
  
-% %% calculate similarity
-% 
-% sim_mat = zeros(length(labeltrain),length(labeltest));
-% for i = 1 : length(labeltrain)
-%     T1=LogC(:,:,i);
-%     for j = 1 : length(labeltest)
-%         T2=LogC_t(:,:,j);
-%         T = T1-T2;
-%         T = T'*T;
-%         sim_mat(i,j) = trace(Q_rmml*T);
-%     end
-% end
-% 
-% %% calculate accuracy
-% 
-% sampleNum = length(labeltest);
-% [~, ind] = sort(sim_mat,1,'ascend');
-% correctNum = length(find((labeltest-labeltrain(ind(1,:)))==0));
-% fRate = correctNum/sampleNum;
-% fprintf('fRate = %f \n', fRate);
+% calculate similarity
+
+[labels_train, labels_test, sim_mat] = calculateSim(Q_rmml, dataset);
+save([dirPre, dataset, '/', dataset,'_sim.mat'], 'sim_mat');
+% calculate accuracy
+
+sampleNum = size(sim_mat, 2);
+[~, ind] = sort(sim_mat,1,'ascend');
+correctNum = length(find((labels_test-labels_train(ind(1,:)))==0));
+fRate = correctNum/sampleNum;
+fprintf('fRate = %f \n', fRate);
 
 end
