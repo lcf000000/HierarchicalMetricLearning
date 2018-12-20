@@ -1,7 +1,6 @@
-function spdFeature(dataset)
+function spdFeature(dataset, dirPre)
 %SPDCACHE Summary of this function goes here
 %   Detailed explanation goes here
- dirPre = '/home/data/ML_Data/';
     set = {'train', 'test'};
     for s=1:2
         file_list = dir([dirPre, dataset, '/',  set{s}, '/', dataset, '_', set{s}, '_*.mat' ]);

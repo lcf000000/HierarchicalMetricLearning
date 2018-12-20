@@ -1,10 +1,9 @@
-function [tdt, trt, fRate]=rmml_rie(dataset, lam, tt, m)
- dirPre = '/home/data/ML_Data/';
+function [tdt, trt, fRate]=rmml_rie(dataset, lam, tt, m, dirPre)
 % tic
-% S = generatePosSamples(dataset, m);
+% S = generatePosSamples(dataset, m, dirPre);
 % save([dirPre, dataset, '/', dataset,'_S.mat'], 'S');
 % fprintf('Positive samples done ! \n');
-% D = generateNegSamples(dataset, m);
+% D = generateNegSamples(dataset, m, dirPre);
 % save([dirPre, dataset, '/', dataset,'_D.mat'], 'D');
 % fprintf('Negtive samples done ! \n');
 % tdt=toc;
@@ -22,7 +21,7 @@ Q_0 = eye(513);
  
 % calculate similarity
 
-[labels_train, labels_test, sim_mat] = calculateSim(Q_rmml, dataset);
+[labels_train, labels_test, sim_mat] = calculateSim(Q_rmml, dataset, dirPre);
 save([dirPre, dataset, '/', dataset,'_sim.mat'], 'sim_mat');
 % calculate accuracy
 

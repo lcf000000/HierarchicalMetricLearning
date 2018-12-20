@@ -1,7 +1,6 @@
-function S = generatePosSamples(dataset, m)
+function S = generatePosSamples(dataset, m, dirPre)
 %GENERATESAMPLE Summary of this function goes here
 %   Detailed explanation goes here
-    dirPre = '/home/data/ML_Data/';
     file_list = dir([dirPre, dataset, '/spdFeature_train/', dataset, '_train_*.mat' ]);
     class_num = length(file_list);
     S = zeros(513, 513);

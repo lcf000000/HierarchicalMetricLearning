@@ -1,7 +1,6 @@
-function [labels_train, labels_test, sim_mat] = calculateSim(Q_rmml, dataset)
+function [labels_train, labels_test, sim_mat] = calculateSim(Q_rmml, dataset, dirPre)
     %CALCULATESIM Summary of this function goes here
-    %   Detailed explanation goes here
-    dirPre = '/home/data/ML_Data/';
+    %   Detailed explanation goes her
     test_len = load([dirPre, dataset, '/cifar100_test_length.mat' ]);
     train_len = load([dirPre, dataset, '/cifar100_train_length.mat' ]);
     test_list = dir([dirPre, dataset, '/spdFeature_test/', dataset, '_test_*.mat' ]);

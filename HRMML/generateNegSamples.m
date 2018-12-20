@@ -1,7 +1,6 @@
-function D = generateNegSamples(dataset, m)
+function D = generateNegSamples(dataset, m, dirPre)
 %GENERATENEGSAMPLES Summary of this function goes here
 %   Detailed explanation goes here
-    dirPre = '/home/data/ML_Data/';
     len = load([dirPre, dataset, '/', dataset, '_train_length.mat' ]);
     file_list = dir([dirPre, dataset, '/spdFeature_train/', dataset, '_train_*.mat' ]);
     class_num = length(file_list);

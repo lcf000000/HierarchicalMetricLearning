@@ -1,8 +1,7 @@
-function generateSet(dataset)
+function generateSet(dataset, dirPre)
 %GENERATESET Summary of this function goes here
 %   Detailed explanation goes here
     set = {'train', 'test'};
-    dirPre = '/home/data/ML_Data/';
     for s=1:2
         sum = 0;
         super_class = [];
