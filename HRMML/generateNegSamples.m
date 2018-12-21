@@ -21,11 +21,11 @@ function D = generateNegSamples(dataset, m, dirPre)
     
     for i=1:class_num
         file = dir([dirPre, dataset, '/spdFeature_train/', dataset, '_train_', num2str(i), '_*.mat']);
-        anchors = load([dirPre, dataset, '/spdFeature_train/', file.name]);
-        super_class = anchors.labels_1(1);
+        select_class = load([dirPre, dataset, '/spdFeature_train/', file.name]);
+        super_class = select_class.labels_1(1);
         sub_list = dir([dirPre, dataset, '/spdFeature_train/', dataset, '_train_*_', num2str(super_class), '.mat']);
         subClass_num = length(sub_list);
-        anchor_num = numel(anchors.labels_0);
+        anchor_num = numel(select_class.labels_0);
         for j=1:anchor_num
             anchor = anchors.data_feature(:, :, j);
             for p=1:subClass_num
@@ -46,9 +46,11 @@ function D = generateNegSamples(dataset, m, dirPre)
                             end
                         end
                     end
+                    clear sample;
                 end
             end
         end
+        clear select_class;
     end
 end
 

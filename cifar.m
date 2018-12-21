@@ -7,7 +7,7 @@ net.move('gpu');
 % vl_simplenn_move(net, 'gpu');
 net.mode = 'test';
 m = 50;
-
+dirPre = '/home/data/ML_Data/';
 % class_label = ['',''];
 % imgs_path = '/home/data/VOC2012/JPEGImages/'; 
 % ann_path = '/home/data/VOC2012/ImageSets/Main/';
@@ -15,7 +15,7 @@ m = 50;
 % load and preprocess an image
 set = {'train', 'test'};
 for s=1:2
-    load(['./cifar-100-matlab/', set{s},'.mat']);
+    load([dirPre, 'cifar-100-matlab/', set{s},'.mat']);
     for j=1:numel(unique(fine_labels))
         data_feature_all = [];
         labels_0_all = [];
@@ -43,7 +43,7 @@ for s=1:2
                 fprintf('processing %d-th image...\n', i);
             end
         end
-        [~, inds]=datasample([1:numel(labels_0_all)], m);
+        [~, inds]=datasample([1:numel(labels_0_all)], m, 'Replace', false);
         data_feature = cell(1,m);
         labels_0 = zeros(1,m);
         labels_1 = zeros(1,m);
@@ -52,6 +52,6 @@ for s=1:2
             labels_0(p) = labels_0_all(inds(p));
             labels_1(p) = labels_1_all(inds(p));
         end
-        save(sprintf(['./feature/cifar100/', set{s},'/cifar100_', set{s},'_%d_%d.mat'], j, labels_1_all(1)), 'data_feature', 'labels_0', 'labels_1');
+        save(sprintf([dirPre, '/cifar100/', set{s},'/cifar100_', set{s},'_%d_%d.mat'], j, labels_1_all(1)), 'data_feature', 'labels_0', 'labels_1');
     end
 end

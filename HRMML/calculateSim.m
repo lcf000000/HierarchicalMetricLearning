@@ -25,11 +25,13 @@ function [labels_train, labels_test, sim_mat] = calculateSim(Q_rmml, dataset, di
                     T = T1-T2;
                     T = T'*T;
                     sim_mat(idx_train, idx_test) = trace(Q_rmml*T);
-                    idx_train = idx_train + 1;
                     idx_test = idx_test + 1;
                 end
+                clear test;
             end
+            idx_train = idx_train + 1;
         end
+        clear train;
     end
 end
 
